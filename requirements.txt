@@ -1,0 +1,24 @@
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+python-multipart==0.0.9
+
+# ML — déjà installés dans l'env conda
+# torch
+# facenet-pytorch
+Pillow==10.2.0
+numpy==1.26.4
+pandas==2.2.2
+
+# Auth
+PyJWT==2.8.0
+pydantic-settings==2.2.1
+
+# Google Drive (téléchargement dossiers publics)
+gdown==5.2.0
+
+# Prod (désactivé en dev)
+# google-api-python-client==2.128.0
+# google-auth==2.29.0
+
+# Téléchargement ZIP
+httpx==0.27.0
