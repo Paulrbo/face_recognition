@@ -1,8 +1,10 @@
 """
-Gestion des projets :
-- Chaque projet a un dossier dans models/projets/<project_id>/
-- Un fichier status.json suit l'état du projet
-- Un fichier embeddings.csv contient les embeddings générés
+Gestion des projets.
+
+Chaque projet est un dossier dans models/projets/<project_id>/ :
+    ├── status.json     → état du projet
+    ├── embeddings.csv  → embeddings générés (BLOC 1)
+    └── photos/         → photos téléchargées depuis Drive
 """
 
 import json
@@ -20,16 +22,15 @@ def _status_path(project_id: str) -> Path:
 
 
 def creer_projet(nom: str) -> dict | None:
-    """Crée le dossier du projet. Retourne None si le projet existe déjà."""
+    """Crée le dossier du projet. Retourne None si déjà existant."""
     project_id = nom.lower().replace(" ", "-")
     projet_dir = PROJECT_DIR / project_id
     if projet_dir.exists():
         return None
 
-    projet_dir.mkdir(parents=True)
-    (projet_dir / "photos").mkdir()
+    (projet_dir / "photos").mkdir(parents=True)
 
-    status = {
+    data = {
         "id": project_id,
         "nom": nom,
         "status": "created",
@@ -37,8 +38,8 @@ def creer_projet(nom: str) -> dict | None:
         "cree_le": datetime.now().isoformat(),
         "erreur": None,
     }
-    _status_path(project_id).write_text(json.dumps(status, ensure_ascii=False))
-    return status
+    _status_path(project_id).write_text(json.dumps(data, ensure_ascii=False, indent=2))
+    return data
 
 
 def get_projet(project_id: str) -> dict | None:
@@ -56,16 +57,7 @@ def lister_projets() -> list[dict]:
     return sorted(projets, key=lambda p: p["cree_le"], reverse=True)
 
 
-def get_status(project_id: str) -> dict | None:
-    return get_projet(project_id)
-
-
-def set_status(
-    project_id: str,
-    status: str,
-    nb_embeddings: int = 0,
-    erreur: str | None = None,
-):
+def set_status(project_id: str, status: str, nb_embeddings: int = 0, erreur: str | None = None):
     path = _status_path(project_id)
     if not path.exists():
         return
@@ -75,7 +67,7 @@ def set_status(
         data["nb_embeddings"] = nb_embeddings
     if erreur:
         data["erreur"] = erreur
-    path.write_text(json.dumps(data, ensure_ascii=False))
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2))
 
 
 def csv_path(project_id: str) -> Path:
