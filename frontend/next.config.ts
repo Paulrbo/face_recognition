@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api-backend/:path*",
-        destination: 'https://face-recognition-production-xxxx.up.railway.app/:path*',
+        destination: 'https://facerecognition-production-871d.up.railway.app/:path*',
       },
     ];
   },
