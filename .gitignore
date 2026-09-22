@@ -1,0 +1,16 @@
+# Secrets
+.env
+.env.local
+
+# Photos locales (inutiles en prod)
+backend/models/projets/*/photos/
+
+# Cache
+__pycache__/
+*.pyc
+.next/
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
