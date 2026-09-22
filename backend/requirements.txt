@@ -18,6 +18,8 @@ PyJWT==2.8.0
 
 # Google Drive
 gdown==5.2.0
+google-api-python-client==2.128.0
+google-auth==2.29.0
 
 # Téléchargement ZIP
 httpx==0.27.0

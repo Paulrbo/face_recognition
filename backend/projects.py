@@ -76,3 +76,6 @@ def csv_path(project_id: str) -> Path:
 
 def photos_dir(project_id: str) -> Path:
     return PROJECT_DIR / project_id / "photos"
+
+def get_status(project_id: str) -> dict | None:
+    return get_projet(project_id)
