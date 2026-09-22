@@ -2,14 +2,10 @@
 .env
 .env.local
 
-# Photos locales
 backend/models/projets/*/photos/
 
-# Cache Python
 __pycache__/
 *.pyc
-
-# Next.js
 .next/
 node_modules/
 
